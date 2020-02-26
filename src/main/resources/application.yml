@@ -1,0 +1,33 @@
+spring.cloud.stream.bindings:
+  input1:
+    destination: user-clicks
+    consumer.useNativeDecoding: true
+  input2:
+    destination: user-regions
+    consumer.useNativeDecoding: true
+  output:
+    destination: output-topic
+    producer.useNativeEncoding: true
+    consumer.useNativeDecoding: true
+
+# Native Encoding Serde
+spring.cloud.stream.kafka.streams:
+  bindings:
+    input1:
+      consumer:
+        keySerde: org.apache.kafka.common.serialization.Serdes$StringSerde
+        valueSerde: org.apache.kafka.common.serialization.Serdes$LongSerde
+    input2:
+      consumer:
+        keySerde: org.apache.kafka.common.serialization.Serdes$StringSerde
+        valueSerde: org.apache.kafka.common.serialization.Serdes$StringSerde
+    output:
+      consumer:
+        keySerde: org.apache.kafka.common.serialization.Serdes$StringSerde
+        valueSerde: org.apache.kafka.common.serialization.Serdes$LongSerde
+      producer:
+        keySerde: org.apache.kafka.common.serialization.Serdes$StringSerde
+        valueSerde: org.apache.kafka.common.serialization.Serdes$LongSerde
+  binder:
+    configuration:
+      application.id: default
